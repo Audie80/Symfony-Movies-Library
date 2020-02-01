@@ -1,0 +1,8 @@
+<p class="card-text">
+  {% for genre in movie.genres %}
+  <small><a href="{{ path('movie_index_genre', {'name': genre.name}) }}">
+    {{ genre.name }}
+  </a></small>
+  {% if not loop.last %},{% endif %}
+  {% endfor %}
+</p>

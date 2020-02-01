@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Serie index{% endblock %}
+
+{% block body %}
+    <h1>Serie index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>TmdbID</th>
+                <th>Name</th>
+                <th>FirstDate</th>
+                <th>Overview</th>
+                <th>PosterPath</th>
+                <th>GenreIDs</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for serie in series %}
+            <tr>
+                <td>{{ serie.id }}</td>
+                <td>{{ serie.tmdbID }}</td>
+                <td>{{ serie.name }}</td>
+                <td>{{ serie.firstDate ? serie.firstDate|date('Y-m-d') : '' }}</td>
+                <td>{{ serie.overview }}</td>
+                <td>{{ serie.posterPath }}</td>
+                <td>{{ serie.genreIDs }}</td>
+                <td>
+                    <a href="{{ path('serie_show', {'id': serie.id}) }}">show</a>
+                    <a href="{{ path('serie_edit', {'id': serie.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('serie_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Movie index{% endblock %}
+
+{% block body %}
+<div class="row">
+    {% for movie in movies %}
+    <div class="col-md-4 col-sm-6 col-xs-12">
+
+        <div class="card text-white bg-dark mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-4 align-self-center">
+
+                    {% if app.user %}
+                        {% set favoriteClass = '' %}
+                        {% if movie in app.user.favoriteMovies %}
+                            {% set favoriteClass = 'btn-danger' %}
+                        {% else %}
+                            {% set favoriteClass = 'btn-primary' %}
+                        {% endif %}
+                        <button class="btn favoriteMovie {{ favoriteClass }}" data-id="{{ movie.id }}"><3</button>
+                    {% endif %}
+
+                    <img src="https://image.tmdb.org/t/p/w500/{{ movie.posterPath }}" class="card-img" alt="Affiche du film {{ movie.title }}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body" style="height: 250px;">
+                        <h5 class="movie-{{ movie.tmdbID }} card-title mt-n2">{{ movie.title|slice(0, 20) }}</h5>
+                        <p class="card-text">{{ movie.overview|slice(0, 100) }}...</p>
+                        <a href="{{ path('movie_show', {'id': movie.id}) }}" class="btn btn-primary">Détails</a>
+                        <a href="{{ path('movie_edit', {'id': movie.id}) }}" class="btn btn-secondary">Modifier</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">{{ include('partials/genres_movies.html.twig') }}</div>
+        </div>
+
+        
+    </div>
+    {% else %}
+        <div>
+            <p>no records found</p>
+        </div>
+    {% endfor %}
+</div>
+<div class="navigation">
+    {{ knp_pagination_render(movies) }}
+</div>
+{% endblock %}

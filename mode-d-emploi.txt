@@ -1,0 +1,23 @@
+commande pour créer un projet vierge à partir d'un squelette de site Web : composer create-project symfony/website-skeleton nom-du-projet
+
+commande pour lancer le serveur : symfony server:start
+
+commande pour créer une entité : bin/console make:entity
+
+commande pour créer le CRUD d'une entité : bin/console make:CRUD
+(crée les routes liées à l'entité, avec le formulaire adéquat pour chaque route)
+
+Pour créer la base de données :
+dans le fichier .env, modifier la ligne DATABASE_URL=mysql://root@127.0.0.1:3306/movieProjectSymfony
+lancer la commande bin/console doctrine:database:create
+
+création des fichiers de migration : bin/console make:migration
+
+lancer la migration : bin/console doctrine:migrations:migrate
+
+créer une nouvelle commande (ex: insérer des données dans la bdd) : bin/console make:command
+-> modifier le code dans le fichier src/Command
+
+créer un utilisateur
+bin/console make:user
++ bin/console make:auth
